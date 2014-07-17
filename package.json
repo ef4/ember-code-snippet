@@ -13,7 +13,7 @@
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-browserify": "^0.1.0",
-    "broccoli-spelunk": "git://github.com/ef4/broccoli-spelunk#with-newer-spelunk"
+    "broccoli-spelunk": "git://github.com/ef4/broccoli-spelunk#with-newer-dep"
   },
   "keywords": [
     "ember-addon"
