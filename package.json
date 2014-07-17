@@ -8,6 +8,7 @@
   },
   "author": "Edward Faulkner <ef@alum.mit.edu>",
   "license": "MIT",
+  "repository": "https://github.com/ef4/ember-code-snippet",
   "dependencies": {
     "highlight.js": "^8.1.0",
     "broccoli-static-compiler": "^0.1.4",
