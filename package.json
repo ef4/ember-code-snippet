@@ -1,0 +1,21 @@
+{
+  "name": "ember-code-snippet",
+  "version": "0.0.1",
+  "description": "Ember component for embedding syntax-highlighted code samples.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edward Faulkner <ef@alum.mit.edu>",
+  "license": "MIT",
+  "dependencies": {
+    "highlight.js": "^8.1.0",
+    "broccoli-static-compiler": "^0.1.4",
+    "broccoli-merge-trees": "^0.1.4",
+    "broccoli-browserify": "^0.1.0",
+    "broccoli-spelunk": "git://github.com/ef4/broccoli-spelunk#with-newer-spelunk"
+  },
+  "keywords": [
+    "ember-addon"
+  ]
+}
