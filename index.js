@@ -3,7 +3,7 @@
 
 var path = require('path');
 var fs   = require('fs');
-var mergeTrees = require('broccoli-merge-trees')
+var mergeTrees = require('broccoli-merge-trees');
 var browserify = require('broccoli-browserify');
 var flattenFolder = require('broccoli-spelunk');
 
@@ -33,7 +33,7 @@ CodeSnippet.prototype.treeFor = function treeFor(name) {
       outputFile: 'snippets.js',
       mode: 'es6',
       keepExtensions: true
-    })
+    });
     tree = mergeTrees([tree, snippets]);
   }
 
@@ -43,7 +43,7 @@ CodeSnippet.prototype.treeFor = function treeFor(name) {
     src = browserify(src, {
       outputFile: 'highlight.js',
       require: [['./lib/index.js', {expose: 'highlight.js'}]]
-    })
+    });
     tree = mergeTrees([tree, src]);
   }
   return tree;
