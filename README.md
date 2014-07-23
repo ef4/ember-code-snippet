@@ -1,9 +1,10 @@
 Code Snippet Ember Component
 ============================
 
-This is an Ember component (and ember-cli addon) that lets you keep
-your sample code snippets in their own directory tree and then render
-them nicely in your app.
+This is an Ember component (and ember-cli addon) that lets you render
+code snippets within your app. The code snippets can live in their own
+dedicated files or you can extract blocks of code from your
+application itself.
 
 - Syntax highlighting thanks to [highlight.js](http://highlightjs.org/).
 - ember-cli's auto-reload will pick up changes to any of the snippet files.
@@ -19,14 +20,46 @@ Install
 Usage
 -----
 
+There are two ways to store your code snippets. You can use either or
+both together.
+
+### With separate snippet files
+
 Create a new "snippets" directory at the top level of your ember-cli
 application, and place the code snippets you'd like to render in their
-own files inside it.
+own files inside it. They will be identified by filename. So if you
+create the file `snippets/sample-template.hbs`, you can embed it in a
+template with:
 
-Then in one of your templates, you can do:
+    {{code-snippet name="sample-template.hbs"}}
 
-    {{code-snippet name="my-sample.js"}}
+### From within your application source
 
-That will render the contents of "snippets/my-sample.js" and
-syntax-highlight it.
+In any file under your `app` tree, annotate the start and end of a
+code snippet block by placing comments like this:
+
+    // BEGIN-SNIPPET my-nice-example
+    function sample(){
+      return 42;
+    };
+    // END-SNIPPET
+
+The above is a Javascript example, but you can use any language's
+comment format. We're just looking for lines that match
+`/\bBEGIN-SNIPPET\s+(\S+)\b/` and `/\bEND-SNIPPET\b/`.
+
+The opening comment must include a name. The component will identify
+these snippets using the names you specified plus the file extension
+of the file in which they appeared (which helps us detect languages
+for better highlighting). So the above example could be included in a
+template like this:
+
+    {{code-snippet name="my-nice-example.js"}}
+
+By default, the component will try to unindent the code block by
+removing whitespace characters from the start of each line until the
+code bumps up against the edge. You can disable this with:
+
+    {{code-snippet name="my-nice-example.js" unindent=false}}
+
 
