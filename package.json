@@ -1,6 +1,6 @@
 {
   "name": "ember-code-snippet",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Ember component for embedding syntax-highlighted code samples.",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,10 @@
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-browserify": "^0.1.0",
-    "broccoli-spelunk": "^0.1.2"
+    "broccoli-spelunk": "^0.1.2",
+    "es6-promise": "^1.0.0",
+    "broccoli-writer": "^0.1.1",
+    "glob": "^4.0.4"
   },
   "keywords": [
     "ember-addon"

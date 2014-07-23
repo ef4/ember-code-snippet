@@ -6,6 +6,7 @@ var fs   = require('fs');
 var mergeTrees = require('broccoli-merge-trees');
 var browserify = require('broccoli-browserify');
 var flattenFolder = require('broccoli-spelunk');
+var snippetFinder = require('./snippet-finder');
 
 function CodeSnippet(project) {
   this.project = project;
@@ -28,8 +29,12 @@ CodeSnippet.prototype.treeFor = function treeFor(name) {
     tree = unwatchedTree(treePath);
   }
 
-  if (name === 'app' && fs.existsSync('snippets')) {
-    var snippets = flattenFolder('snippets', {
+  if (name === 'app') {
+    var snippets = snippetFinder('app');
+    if (fs.existsSync('snippets')) {
+      snippets = mergeTrees([snippets, 'snippets']);
+    }
+    snippets = flattenFolder(snippets, {
       outputFile: 'snippets.js',
       mode: 'es6',
       keepExtensions: true
