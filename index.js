@@ -20,6 +20,13 @@ function unwatchedTree(dir) {
   };
 }
 
+function snippetPaths(app) {
+  return app.options.snippetPaths || ['snippets'];
+}
+
+function snippetSearchPaths(app){
+  return app.options.snippetSearchPaths || ['app'];
+}
 
 CodeSnippet.prototype.treeFor = function treeFor(name) {
   var tree;
@@ -30,10 +37,14 @@ CodeSnippet.prototype.treeFor = function treeFor(name) {
   }
 
   if (name === 'app') {
-    var snippets = snippetFinder('app');
-    if (fs.existsSync('snippets')) {
-      snippets = mergeTrees([snippets, 'snippets']);
-    }
+    var snippets= mergeTrees(snippetPaths(this.app).filter(function(path){
+      return fs.existsSync(path);
+    }));
+
+    snippets = mergeTrees(snippetSearchPaths(this.app).map(function(path){
+      return snippetFinder(path);
+    }).concat(snippets));
+
     snippets = flattenFolder(snippets, {
       outputFile: 'snippets.js',
       mode: 'es6',

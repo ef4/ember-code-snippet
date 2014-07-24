@@ -33,6 +33,13 @@ template with:
 
     {{code-snippet name="sample-template.hbs"}}
 
+You can choose to load snippet files from different paths by passing
+an option to `new EmberApp` in your `Brocfile.js`:
+
+    var app = new EmberApp({
+      snippetPaths: ['snippets']
+    });
+
 ### From within your application source
 
 In any file under your `app` tree, annotate the start and end of a
@@ -63,3 +70,10 @@ code bumps up against the edge. You can disable this with:
     {{code-snippet name="my-nice-example.js" unindent=false}}
 
 
+You can choose which paths will be searched for inline snippets by
+settings the snippetSearchPaths option when creating your application
+in Brocfile.js:
+
+    var app = new EmberApp({
+      snippetSearchPaths: ['app', 'other']
+    });
