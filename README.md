@@ -6,7 +6,7 @@ code snippets within your app. The code snippets can live in their own
 dedicated files or you can extract blocks of code from your
 application itself.
 
-- Syntax highlighting thanks to [highlight.js](http://highlightjs.org/).
+- Syntax highlighting thanks to [highlight.js](http://highlightjs.org/). To see how it looks, [view the highlightjs previews](https://highlightjs.org/).
 - ember-cli's auto-reload will pick up changes to any of the snippet files.
 - the component uses file extensions to help highlight.js guess the
   right language (right now just for "js" and "hbs", but please send
