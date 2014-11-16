@@ -8,40 +8,24 @@ var browserify = require('broccoli-browserify');
 var flattenFolder = require('broccoli-spelunk');
 var snippetFinder = require('./snippet-finder');
 
-function CodeSnippet(project) {
-  this.project = project;
-  this.name    = 'Code Snippet Ember Component';
-}
+module.exports = {
+  name: 'Code Snippet Ember Component',
 
-function unwatchedTree(dir) {
-  return {
-    read:    function() { return dir; },
-    cleanup: function() { }
-  };
-}
+  snippetPaths: function() {
+    return this.app.options.snippetPaths || ['snippets'];
+  },
 
-function snippetPaths(app) {
-  return app.options.snippetPaths || ['snippets'];
-}
+  snippetSearchPaths: function(){
+    return this.app.options.snippetSearchPaths || ['app'];
+  },
 
-function snippetSearchPaths(app){
-  return app.options.snippetSearchPaths || ['app'];
-}
 
-CodeSnippet.prototype.treeFor = function treeFor(name) {
-  var tree;
-  var treePath = path.join('node_modules', 'ember-code-snippet', name + '-addon');
-
-  if (fs.existsSync(treePath)) {
-    tree = unwatchedTree(treePath);
-  }
-
-  if (name === 'app') {
-    var snippets= mergeTrees(snippetPaths(this.app).filter(function(path){
+  treeForApp: function(tree){
+    var snippets= mergeTrees(this.snippetPaths().filter(function(path){
       return fs.existsSync(path);
     }));
 
-    snippets = mergeTrees(snippetSearchPaths(this.app).map(function(path){
+    snippets = mergeTrees(this.snippetSearchPaths().map(function(path){
       return snippetFinder(path);
     }).concat(snippets));
 
@@ -50,25 +34,22 @@ CodeSnippet.prototype.treeFor = function treeFor(name) {
       mode: 'es6',
       keepExtensions: true
     });
-    tree = mergeTrees([tree, snippets]);
-  }
 
-  if (name === 'vendor') {
+    return this.mergeTrees([tree, snippets]);
+  },
+
+  treeForVendor: function(tree){
     // Package up the highlight.js source from its node module.
-    var src = unwatchedTree(path.join('node_modules', 'ember-code-snippet', 'node_modules', 'highlight.js'));
-    src = browserify(src, {
+    var src = this.treeGenerator(path.join('node_modules', 'ember-code-snippet', 'node_modules', 'highlight.js'));
+    var highlight = browserify(src, {
       outputFile: 'highlight.js',
       require: [['./lib/index.js', {expose: 'highlight.js'}]]
     });
-    tree = mergeTrees([tree, src]);
+    return this.mergeTrees([highlight, tree]);
+  },
+
+  included: function(app) {
+    app.import('vendor/highlight.js');
+    app.import('vendor/highlight-style.css');
   }
-  return tree;
 };
-
-CodeSnippet.prototype.included = function included(app) {
-  this.app = app;
-  this.app.import('vendor/highlight.js');
-  this.app.import('vendor/highlight-style.css');
-};
-
-module.exports = CodeSnippet;
