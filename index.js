@@ -40,7 +40,7 @@ module.exports = {
 
   treeForVendor: function(tree){
     // Package up the highlight.js source from its node module.
-    var src = this.treeGenerator(path.join('node_modules', 'ember-code-snippet', 'node_modules', 'highlight.js'));
+    var src = this.treeGenerator(path.join(__dirname, 'node_modules', 'highlight.js'));
     var highlight = browserify(src, {
       outputFile: 'highlight.js',
       require: [['./lib/index.js', {expose: 'highlight.js'}]]
