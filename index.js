@@ -5,7 +5,7 @@ var path = require('path');
 var fs   = require('fs');
 var mergeTrees = require('broccoli-merge-trees');
 var browserify = require('broccoli-browserify');
-var flattenFolder = require('broccoli-spelunk');
+var flatiron = require('broccoli-flatiron');
 var snippetFinder = require('./snippet-finder');
 
 module.exports = {
@@ -29,10 +29,8 @@ module.exports = {
       return snippetFinder(path);
     }).concat(snippets));
 
-    snippets = flattenFolder(snippets, {
-      outputFile: 'snippets.js',
-      mode: 'es6',
-      keepExtensions: true
+    snippets = flatiron(snippets, {
+      outputFile: 'snippets.js'
     });
 
     return this.mergeTrees([tree, snippets]);
