@@ -14,7 +14,7 @@
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-browserify": "^0.1.0",
-    "broccoli-spelunk": "^0.1.2",
+    "broccoli-flatiron": "^0.0.0",
     "es6-promise": "^1.0.0",
     "broccoli-writer": "^0.1.1",
     "glob": "^4.0.4"
