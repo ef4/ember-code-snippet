@@ -26,19 +26,19 @@ export default Ember.Component.extend({
     return src;
   },
 
-  source: function(){
+  source: Ember.computed('name', function(){
     return this._unindent(
       (Snippets[this.get('name')] || "")
         .replace(/^(\s*\n)*/, '')
         .replace(/\s*$/, '')
     );
-  }.property('name'),
+  }),
 
   didInsertElement: function(){
     Highlight.highlightBlock(this.get('element'));
   },
 
-  language: function(){
+  language: Ember.computed('name', function(){
     var m = /\.(\w+)$/i.exec(this.get('name'));
     if (m) {
       switch (m[1].toLowerCase()) {
@@ -48,5 +48,5 @@ export default Ember.Component.extend({
         return 'handlebars';
       }
     }
-  }.property('name')
+  })
 });
