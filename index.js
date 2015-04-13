@@ -33,7 +33,7 @@ module.exports = {
       outputFile: 'snippets.js'
     });
 
-    return this.mergeTrees([tree, snippets]);
+    return mergeTrees([tree, snippets]);
   },
 
   treeForVendor: function(tree){
@@ -43,7 +43,7 @@ module.exports = {
       outputFile: 'highlight.js',
       require: [['./lib/index.js', {expose: 'highlight.js'}]]
     });
-    return this.mergeTrees([highlight, tree]);
+    return mergeTrees([highlight, tree]);
   },
 
   included: function(app) {
