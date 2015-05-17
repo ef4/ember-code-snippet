@@ -46,6 +46,10 @@ export default Ember.Component.extend({
         return 'javascript';
       case 'hbs':
         return 'handlebars';
+      case 'css':
+        return 'css';
+      case 'scss':
+        return 'scss';
       }
     }
   })
