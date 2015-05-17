@@ -9,8 +9,7 @@ application itself.
 - Syntax highlighting thanks to [highlight.js](http://highlightjs.org/). To see how it looks, [view the highlightjs previews](https://highlightjs.org/).
 - ember-cli's auto-reload will pick up changes to any of the snippet files.
 - the component uses file extensions to help highlight.js guess the
-  right language (right now just for "js" and "hbs", but please send
-  PRs for ones you want).
+  right language.
 
 Install
 -------
