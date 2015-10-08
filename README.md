@@ -14,7 +14,9 @@ application itself.
 Install
 -------
 
-`npm install --save-dev ember-code-snippet`
+``` sh
+npm install --save-dev ember-code-snippet
+```
 
 Usage
 -----
@@ -30,25 +32,31 @@ own files inside it. They will be identified by filename. So if you
 create the file `snippets/sample-template.hbs`, you can embed it in a
 template with:
 
-    {{code-snippet name="sample-template.hbs"}}
+```hbs
+{{code-snippet name="sample-template.hbs"}}
+```
 
 You can choose to load snippet files from different paths by passing
 an option to `new EmberApp` in your `Brocfile.js`:
 
-    var app = new EmberApp({
-      snippetPaths: ['snippets']
-    });
+```js
+var app = new EmberApp({
+  snippetPaths: ['snippets']
+});
+```
 
 ### From within your application source
 
 In any file under your `app` tree, annotate the start and end of a
 code snippet block by placing comments like this:
 
-    // BEGIN-SNIPPET my-nice-example
-    function sample(){
-      return 42;
-    };
-    // END-SNIPPET
+```js
+// BEGIN-SNIPPET my-nice-example
+function sample(){
+  return 42;
+};
+// END-SNIPPET
+```
 
 The above is a Javascript example, but you can use any language's
 comment format. We're just looking for lines that match
@@ -60,19 +68,25 @@ of the file in which they appeared (which helps us detect languages
 for better highlighting). So the above example could be included in a
 template like this:
 
-    {{code-snippet name="my-nice-example.js"}}
+```hbs
+{{code-snippet name="my-nice-example.js"}}
+```
 
 By default, the component will try to unindent the code block by
 removing whitespace characters from the start of each line until the
 code bumps up against the edge. You can disable this with:
 
-    {{code-snippet name="my-nice-example.js" unindent=false}}
+```hbs
+{{code-snippet name="my-nice-example.js" unindent=false}}
+```
 
 
 You can choose which paths will be searched for inline snippets by
 settings the snippetSearchPaths option when creating your application
 in Brocfile.js:
 
-    var app = new EmberApp({
-      snippetSearchPaths: ['app', 'other']
-    });
+```js
+var app = new EmberApp({
+  snippetSearchPaths: ['app', 'other']
+});
+```
