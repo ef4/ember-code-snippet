@@ -52,6 +52,8 @@ export default Ember.Component.extend({
         return 'scss';
       case 'less':
         return 'less';
+      case 'emblem':
+        return 'emblem';
       }
     }
   })
