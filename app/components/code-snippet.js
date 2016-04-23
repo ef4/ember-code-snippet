@@ -44,6 +44,8 @@ export default Ember.Component.extend({
       switch (m[1].toLowerCase()) {
       case 'js':
         return 'javascript';
+      case 'coffee':
+        return 'coffeescript';
       case 'hbs':
         return 'handlebars';
       case 'css':
