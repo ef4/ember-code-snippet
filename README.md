@@ -37,7 +37,7 @@ template with:
 ```
 
 You can choose to load snippet files from different paths by passing
-an option to `new EmberApp` in your `Brocfile.js`:
+an option to `new EmberApp` in your `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
@@ -83,7 +83,7 @@ code bumps up against the edge. You can disable this with:
 
 You can choose which paths will be searched for inline snippets by
 settings the snippetSearchPaths option when creating your application
-in Brocfile.js:
+in ember-cli-build.js:
 
 ```js
 var app = new EmberApp({
