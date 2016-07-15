@@ -15,7 +15,7 @@ Install
 -------
 
 ``` sh
-npm install --save-dev ember-code-snippet
+ember install ember-code-snippet
 ```
 
 Usage
