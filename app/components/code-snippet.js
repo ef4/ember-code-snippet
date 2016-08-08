@@ -47,7 +47,7 @@ export default Ember.Component.extend({
       case 'coffee':
         return 'coffeescript';
       case 'hbs':
-        return 'handlebars';
+        return 'htmlbars';
       case 'css':
         return 'css';
       case 'scss':
@@ -56,6 +56,8 @@ export default Ember.Component.extend({
         return 'less';
       case 'emblem':
         return 'emblem';
+      case 'ts':
+        return 'typescript';
       }
     }
   })
