@@ -56,6 +56,8 @@ export default Ember.Component.extend({
         return 'less';
       case 'emblem':
         return 'emblem';
+      case 'ts':
+        return 'typescript';
       }
     }
   })
