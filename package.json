@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": "https://github.com/ef4/ember-code-snippet",
   "dependencies": {
-    "highlight.js": "^8.1.0",
+    "highlight.js": "^9.5.0",
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^1.0.0",
     "broccoli-browserify": "^0.1.0",
