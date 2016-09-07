@@ -13,7 +13,6 @@
     "highlight.js": "^9.5.0",
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^1.0.0",
-    "broccoli-browserify": "^0.1.0",
     "broccoli-flatiron": "^0.0.0",
     "es6-promise": "^1.0.0",
     "broccoli-writer": "^0.1.1",
@@ -21,5 +20,8 @@
   },
   "keywords": [
     "ember-addon"
-  ]
+  ],
+  "devDependencies": {
+    "ember-browserify": "^1.1.12"
+  }
 }
