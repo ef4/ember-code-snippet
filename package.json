@@ -14,14 +14,12 @@
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^1.0.0",
     "broccoli-flatiron": "^0.0.0",
+    "ember-browserify": "^1.1.12",
     "es6-promise": "^1.0.0",
     "broccoli-writer": "^0.1.1",
     "glob": "^4.0.4"
   },
   "keywords": [
     "ember-addon"
-  ],
-  "devDependencies": {
-    "ember-browserify": "^1.1.12"
-  }
+  ]
 }
