@@ -1,6 +1,6 @@
 {
   "name": "ember-code-snippet",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Ember component for embedding syntax-highlighted code samples.",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "highlight.js": "^9.5.0",
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^1.0.0",
+    "broccoli-browserify": "^0.1.0",
     "broccoli-flatiron": "^0.0.0",
-    "ember-browserify": "^1.1.12",
     "es6-promise": "^1.0.0",
     "broccoli-writer": "^0.1.1",
     "glob": "^4.0.4"

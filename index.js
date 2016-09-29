@@ -4,6 +4,7 @@
 var path = require('path');
 var fs   = require('fs');
 var mergeTrees = require('broccoli-merge-trees');
+var browserify = require('broccoli-browserify');
 var flatiron = require('broccoli-flatiron');
 var snippetFinder = require('./snippet-finder');
 
@@ -40,10 +41,15 @@ module.exports = {
 
     var src = this.treeGenerator(path.join(require.resolve('highlight.js'), '..', '..'));
 
-    return mergeTrees([src, tree]);
+    var highlight = browserify(src, {
+      outputFile: 'browserified-highlight.js',
+      require: [['./lib/index.js', {expose: 'highlight.js'}]]
+    });
+    return mergeTrees([highlight, tree]);
   },
 
   included: function(app) {
+    app.import('vendor/browserified-highlight.js');
     app.import('vendor/highlight-style.css');
   }
 };
