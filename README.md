@@ -45,6 +45,15 @@ var app = new EmberApp({
 });
 ```
 
+If you want to use snippets located in an addon's dummy application,
+add the dummy app path to `snippetPaths`:
+
+```js
+var app = new EmberAddon({
+  snippetPaths: ['tests/dummy/app']
+});
+```
+
 ### From within your application source
 
 In any file under your `app` tree, annotate the start and end of a
