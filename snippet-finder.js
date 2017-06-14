@@ -35,9 +35,10 @@ function extractSnippets(fileContent, regexes) {
         content.push(line);
       }
     } else {
-      var m = regexes.reduce(function(acc, currentRegex) {
-        return (regex = currentRegex).begin.exec(line);
-      }, null);
+      var m;
+      regex = regexes.find(function(regex) {
+        return m = regex.begin.exec(line);
+      });
 
       if (m) {
         inside = true;
