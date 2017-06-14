@@ -19,14 +19,21 @@ module.exports = {
     return this.app.options.snippetSearchPaths || ['app'];
   },
 
+  snippetRegexes: function() {
+    return [{
+      begin: /\bBEGIN-SNIPPET\s+(\S+)\b/,
+      end: /\bEND-SNIPPET\b/
+    }].concat(this.app.options.snippetRegexes || []);
+  },
 
   treeForApp: function(tree){
-    var snippets= mergeTrees(this.snippetPaths().filter(function(path){
+    var snippets = mergeTrees(this.snippetPaths().filter(function(path){
       return fs.existsSync(path);
     }));
 
+    var snippetRegexes = this.snippetRegexes();
     snippets = mergeTrees(this.snippetSearchPaths().map(function(path){
-      return snippetFinder(path);
+      return snippetFinder(path, snippetRegexes);
     }).concat(snippets));
 
     snippets = flatiron(snippets, {

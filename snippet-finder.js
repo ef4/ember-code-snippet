@@ -19,14 +19,15 @@ function findFiles(srcDir) {
   });
 }
 
-function extractSnippets(fileContent) {
+function extractSnippets(fileContent, regexes) {
   var inside = false;
   var content = [];
   var output = {};
   var name;
+  var regex;
   fileContent.split("\n").forEach(function(line){
     if (inside) {
-      if (/\bEND-SNIPPET\b/.test(line)) {
+      if (regex.end.test(line)) {
         inside = false;
         output[name] = content.join("\n");
         content = [];
@@ -34,7 +35,14 @@ function extractSnippets(fileContent) {
         content.push(line);
       }
     } else {
-      var m = /\bBEGIN-SNIPPET\s+(\S+)\b/.exec(line);
+      // console.log('line=',line);
+      var m = regexes.reduce(function(acc, currentRegex) {
+        // console.log('match -', line, currentRegex);
+        return (regex = currentRegex).begin.exec(line);
+      }, null);
+
+      // console.log('m=',m);
+
       if (m) {
         inside = true;
         name = m[1];
@@ -45,20 +53,24 @@ function extractSnippets(fileContent) {
 }
 
 
-function SnippetFinder(inputTree){
-  if (!(this instanceof SnippetFinder)){
-    return new SnippetFinder(inputTree);
+function SnippetFinder(inputTree, snippetRegexes) {
+  if (!(this instanceof SnippetFinder)) {
+    return new SnippetFinder(inputTree, snippetRegexes);
   }
   this.inputTree = inputTree;
+  this.snippetRegexes = snippetRegexes;
 }
 
 SnippetFinder.prototype = Object.create(Writer.prototype);
 SnippetFinder.prototype.constructor = SnippetFinder;
 
 SnippetFinder.prototype.write = function (readTree, destDir) {
+  var regexes = this.snippetRegexes;
+  console.log('regexes=',regexes);
+
   return readTree(this.inputTree).then(findFiles).then(function(files){
     files.forEach(function(filename){
-      var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'));
+      var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
       for (var name in snippets){
         fs.writeFileSync(path.join(destDir, name)+path.extname(filename),
                          snippets[name]);
