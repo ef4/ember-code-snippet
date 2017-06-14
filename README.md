@@ -27,7 +27,7 @@ both together.
 ### With separate snippet files
 
 Create a new "snippets" directory at the top level of your ember-cli
-application, and place the code snippets you'd like to render in their
+application or addon, and place the code snippets you'd like to render in their
 own files inside it. They will be identified by filename. So if you
 create the file `snippets/sample-template.hbs`, you can embed it in a
 template with:
