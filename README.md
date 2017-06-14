@@ -81,6 +81,19 @@ template like this:
 {{code-snippet name="my-nice-example.js"}}
 ```
 
+You can also define your own regex to find snippets. Just use the `snippetRegexes` option:
+
+```js
+var app = new EmberAddon({
+ snippetRegexes: {
+   begin: /{{#element-example\sname=\"(\S+)\"/,
+   end: /{{\/element-example}}/,
+ }
+});
+```
+
+In the regex above everything in the `element-example` component block will be a snippet! Just make sure the first regex capture group is the name of the snippet.
+
 By default, the component will try to unindent the code block by
 removing whitespace characters from the start of each line until the
 code bumps up against the edge. You can disable this with:
