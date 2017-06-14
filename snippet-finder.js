@@ -35,13 +35,9 @@ function extractSnippets(fileContent, regexes) {
         content.push(line);
       }
     } else {
-      // console.log('line=',line);
       var m = regexes.reduce(function(acc, currentRegex) {
-        // console.log('match -', line, currentRegex);
         return (regex = currentRegex).begin.exec(line);
       }, null);
-
-      // console.log('m=',m);
 
       if (m) {
         inside = true;
@@ -66,7 +62,6 @@ SnippetFinder.prototype.constructor = SnippetFinder;
 
 SnippetFinder.prototype.write = function (readTree, destDir) {
   var regexes = this.snippetRegexes;
-  console.log('regexes=',regexes);
 
   return readTree(this.inputTree).then(findFiles).then(function(files){
     files.forEach(function(filename){
