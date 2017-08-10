@@ -1,10 +1,8 @@
 /*jshint node: true */
 'use strict';
 
-var path = require('path');
 var fs   = require('fs');
 var mergeTrees = require('broccoli-merge-trees');
-var browserify = require('broccoli-browserify');
 var flatiron = require('broccoli-flatiron');
 var snippetFinder = require('./snippet-finder');
 var findHost = require('./utils/findHost');
@@ -30,6 +28,24 @@ module.exports = {
     }].concat(app.options.snippetRegexes || []);
   },
 
+  includeHighlightJS: function() {
+    var app = findHost(this);
+    if (typeof app.options.includeHighlightJS === 'boolean') {
+      return app.options.includeHighlightJS;
+    } else {
+      return true;
+    }
+  },
+
+  includeHighlightStyle: function() {
+    var app = findHost(this);
+    if (typeof app.options.includeHighlightStyle === 'boolean') {
+      return app.options.includeHighlightStyle;
+    } else {
+      return true;
+    }
+  },
+
   treeForApp: function(tree){
     var snippets = mergeTrees(this.snippetPaths().filter(function(path){
       return fs.existsSync(path);
@@ -47,20 +63,14 @@ module.exports = {
     return mergeTrees([tree, snippets]);
   },
 
-  treeForVendor: function(tree){
-    // Package up the highlight.js source from its node module.
-
-    var src = this.treeGenerator(path.join(require.resolve('highlight.js'), '..', '..'));
-
-    var highlight = browserify(src, {
-      outputFile: 'browserified-highlight.js',
-      require: [['./lib/index.js', {expose: 'highlight.js'}]]
-    });
-    return mergeTrees([highlight, tree]);
-  },
-
   included: function(app) {
-    app.import('vendor/browserified-highlight.js');
-    app.import('vendor/highlight-style.css');
+    if (this.includeHighlightJS()) {
+      app.import('vendor/highlight.pack.js', { using: [
+        { transformation: 'amd', as: 'highlight.js' }
+      ] } );
+    }
+    if (this.includeHighlightStyle()) {
+      app.import('vendor/highlight-style.css');
+    }
   }
 };

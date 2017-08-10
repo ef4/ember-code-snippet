@@ -1,6 +1,6 @@
 {
   "name": "ember-code-snippet",
-  "version": "1.10.0",
+  "version": "2.0.0-alpha.1",
   "description": "Ember component for embedding syntax-highlighted code samples.",
   "main": "index.js",
   "scripts": {
@@ -10,13 +10,11 @@
   "license": "MIT",
   "repository": "https://github.com/ef4/ember-code-snippet",
   "dependencies": {
-    "highlight.js": "^9.5.0",
-    "broccoli-static-compiler": "^0.1.4",
-    "broccoli-merge-trees": "^1.0.0",
-    "broccoli-browserify": "^0.1.0",
     "broccoli-flatiron": "^0.0.0",
-    "es6-promise": "^1.0.0",
+    "broccoli-merge-trees": "^1.0.0",
+    "broccoli-static-compiler": "^0.1.4",
     "broccoli-writer": "^0.1.1",
+    "es6-promise": "^1.0.0",
     "glob": "^4.0.4"
   },
   "keywords": [
