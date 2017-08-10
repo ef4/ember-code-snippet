@@ -10,14 +10,13 @@
   "license": "MIT",
   "repository": "https://github.com/ef4/ember-code-snippet",
   "dependencies": {
-    "highlight.js": "^9.5.0",
-    "broccoli-static-compiler": "^0.1.4",
-    "broccoli-merge-trees": "^1.0.0",
-    "broccoli-browserify": "^0.1.0",
     "broccoli-flatiron": "^0.0.0",
-    "es6-promise": "^1.0.0",
+    "broccoli-merge-trees": "^1.0.0",
+    "broccoli-static-compiler": "^0.1.4",
     "broccoli-writer": "^0.1.1",
-    "glob": "^4.0.4"
+    "es6-promise": "^1.0.0",
+    "glob": "^4.0.4",
+    "highlight.js": "^9.12.0"
   },
   "keywords": [
     "ember-addon"
