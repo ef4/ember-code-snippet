@@ -7,23 +7,27 @@ var mergeTrees = require('broccoli-merge-trees');
 var browserify = require('broccoli-browserify');
 var flatiron = require('broccoli-flatiron');
 var snippetFinder = require('./snippet-finder');
+var findHost = require('./utils/findHost');
 
 module.exports = {
   name: 'Code Snippet Ember Component',
 
   snippetPaths: function() {
-    return this.app.options.snippetPaths || ['snippets'];
+    var app = findHost(this);
+    return app.options.snippetPaths || ['snippets'];
   },
 
   snippetSearchPaths: function(){
-    return this.app.options.snippetSearchPaths || ['app'];
+    var app = findHost(this);
+    return app.options.snippetSearchPaths || ['app'];
   },
 
   snippetRegexes: function() {
+    var app = findHost(this);
     return [{
       begin: /\bBEGIN-SNIPPET\s+(\S+)\b/,
       end: /\bEND-SNIPPET\b/
-    }].concat(this.app.options.snippetRegexes || []);
+    }].concat(app.options.snippetRegexes || []);
   },
 
   treeForApp: function(tree){
