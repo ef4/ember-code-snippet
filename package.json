@@ -19,6 +19,9 @@
     "broccoli-writer": "^0.1.1",
     "glob": "^4.0.4"
   },
+  "peerDependencies": {
+    "ember-browserify": "^1.1.12"
+  },
   "keywords": [
     "ember-addon"
   ]

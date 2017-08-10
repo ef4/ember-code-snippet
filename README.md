@@ -15,6 +15,7 @@ Install
 -------
 
 ``` sh
+ember install ember-browserify
 ember install ember-code-snippet
 ```
 

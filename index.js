@@ -12,6 +12,14 @@ var findHost = require('./utils/findHost');
 module.exports = {
   name: 'Code Snippet Ember Component',
 
+  preBuild: function() {
+    fs.exists('../../node_modules/ember-browserify', function(exists) {
+      if (exists === false) {
+        throw new Error('ember-code-snippet requires ember-browserify to be installed.');
+      }
+    });
+  },
+
   snippetPaths: function() {
     var app = findHost(this);
     return app.options.snippetPaths || ['snippets'];
