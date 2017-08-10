@@ -15,8 +15,7 @@
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-writer": "^0.1.1",
     "es6-promise": "^1.0.0",
-    "glob": "^4.0.4",
-    "highlight.js": "^9.12.0"
+    "glob": "^4.0.4"
   },
   "keywords": [
     "ember-addon"
