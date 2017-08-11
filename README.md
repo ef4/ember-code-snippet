@@ -9,7 +9,7 @@ application itself.
 - Syntax highlighting thanks to [highlight.js](http://highlightjs.org/). To see how it looks, [view the highlightjs previews](https://highlightjs.org/).
 - ember-cli's auto-reload will pick up changes to any of the snippet files.
 - the component uses file extensions to help highlight.js guess the
-  right language.
+  right language. See below for details on choosing the supported languages.
 
 Install
 -------
@@ -111,4 +111,65 @@ in ember-cli-build.js:
 var app = new EmberApp({
   snippetSearchPaths: ['app', 'other']
 });
+```
+
+# Syntax Highlighting Language Support
+
+We depend on [highlight.js](http://highlightjs.org/) for syntax highlighting. It supports 176 languages. But you probably don't want to build all of those into your app.
+
+Out of the box, we only enable:
+
+ - css
+ - coffeescript
+ - html/xml
+ - json
+ - javascript
+ - markdown
+ - handlebars
+ - htmlbars
+ 
+If you want a different set, you can:
+
+1. Tell ember-code-snippet not to include highlight.js automatically for you:
+
+```js
+  // in ember-cli-build.js
+  var app = new EmberApp(defaults, {
+    includeHighlightJS: false
+  });
+```
+
+2. Go to https://highlightjs.org/download/ and generate your own build of highlight.js using the languages you want.
+
+3. Place the resulting highlight.pack.js in your `vendor` directory.
+
+4. Import it directly from your ember-cli-build.js file:
+
+```js
+app.import('vendor/highlight.pack.js', { 
+  using: [ { transformation: 'amd', as: 'highlight.js' } ]
+});
+```
+
+# Theming Support
+
+We include a basic syntax-highlighting theme by default, but highlight.js has 79 different themes to choose from and it's possible to make your own just by writing a stylesheet.
+
+To use a different theme:
+
+1. Tell ember-code-snippet not to include its own theme:
+
+```js
+  // in ember-cli-build.js
+  var app = new EmberApp(defaults, {
+    includeHighlightStyle: false
+  });
+```
+
+2. Place your chosen style in `vendor`.
+
+3. Import it directly from your ember-cli-build.js:
+
+```js
+app.import('vendor/my-highlight-style.css');
 ```
