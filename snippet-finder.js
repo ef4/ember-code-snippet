@@ -20,30 +20,30 @@ function findFiles(srcDir) {
 }
 
 function extractSnippets(fileContent, regexes) {
-  var inside = false;
-  var content = [];
+  var stack = [];
   var output = {};
-  var name;
-  var regex;
   fileContent.split("\n").forEach(function(line){
-    if (inside) {
-      if (regex.end.test(line)) {
-        inside = false;
-        output[name] = content.join("\n");
-        content = [];
-      } else {
-        content.push(line);
-      }
-    } else {
-      var m;
-      regex = regexes.find(function(regex) {
-        return m = regex.begin.exec(line);
-      });
+    var top = stack[stack.length - 1];
+    if (top && top.regex.end.test(line)) {
+      output[top.name] = top.content.join("\n");
+      stack.pop();
+    }
 
-      if (m) {
-        inside = true;
-        name = m[1];
-      }
+    stack.forEach(function(snippet) {
+      snippet.content.push(line);
+    });
+
+    var match;
+    var regex = regexes.find(function(regex) {
+      return match = regex.begin.exec(line);
+    });
+
+    if (match) {
+      stack.push({
+        regex: regex,
+        name: match[1],
+        content: []
+      });
     }
   });
   return output;
