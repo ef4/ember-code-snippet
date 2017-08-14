@@ -1,6 +1,6 @@
 {
   "name": "ember-code-snippet",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "Ember component for embedding syntax-highlighted code samples.",
   "main": "index.js",
   "scripts": {
