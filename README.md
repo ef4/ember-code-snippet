@@ -151,6 +151,23 @@ app.import('vendor/highlight.pack.js', {
 });
 ```
 
+# Line Numbering Support
+
+Line numbering support is provided by a highlight addon [code-highlight-linenums](https://github.com/OverZealous/code-highlight-linenums). To enable call with `lineNumbers=true`.
+
+```hbs
+{{code-snippet name="my-nice-example.js" lineNumbers=true}}
+```
+
+For not including the code-highlight-linenums library, specify on the config like this:
+
+```js
+  // in ember-cli-build.js
+  var app = new EmberApp(defaults, {
+    includeCodeHighlightLinenums: false
+  });
+```
+
 # Theming Support
 
 We include a basic syntax-highlighting theme by default, but highlight.js has 79 different themes to choose from and it's possible to make your own just by writing a stylesheet.

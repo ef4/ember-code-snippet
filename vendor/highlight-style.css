@@ -119,3 +119,81 @@
 .hljs-chunk {
     color: #aaa;
 }
+
+/* this uses the CSS suggested by
+ https://github.com/OverZealous/code-highlight-linenums#example-lesscss
+*/
+
+pre.code-snippet > code .line {
+  display: inline-block;
+  position: relative;
+  padding-left: calc(2ch + 18px);
+}
+
+pre.code-snippet > code .line:before {
+  box-sizing: content-box;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  text-align: right;
+  width: 2ch;
+  content: attr(start);
+  padding-right: 9px;
+  padding-left: 9px;
+  margin-left: calc(-2ch - 27px);
+  margin-right: 9px;
+}
+
+pre.code-snippet > code .line:after {
+  content: ' ';
+}
+
+
+pre.code-snippet > code .line:first-child:before {
+  padding-top: 9px;
+  margin-top: -9px;
+  border-bottom-left-radius: 1em;
+}
+
+pre.code-snippet > code .line:last-child:before {
+  padding-bottom: 9px;
+  margin-bottom: -9px;
+  border-bottom-left-radius: 1em;
+}
+
+pre.code-snippet > code .line.width-3 {
+  padding-left: calc(3ch + 18px);
+}
+
+pre.code-snippet > code .line.width-3:before {
+  width: 3ch;
+  margin-left: calc(-3ch - 27px);
+}
+
+pre.code-snippet > code .line.width-4 {
+  padding-left: calc(4ch + 18px);
+}
+
+pre.code-snippet > code .line.width-4:before {
+  width: 4ch;
+  margin-left: calc(-4ch - 27px);
+}
+
+pre.code-snippet > code .line.width-5 {
+  padding-left: calc(5ch + 18px);
+}
+
+pre.code-snippet > code .line.width-5:before {
+  width: 5ch;
+  margin-left: calc(-5ch - 27px);
+}
+
+pre.code-snippet > code .line.width-6 {
+  padding-left: calc(6ch + 18px);
+}
+
+pre.code-snippet > code .line.width-6:before {
+  width: 6ch;
+  margin-left: calc(-6ch - 27px);
+}

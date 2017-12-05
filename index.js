@@ -37,6 +37,15 @@ module.exports = {
     }
   },
 
+  includeCodeHighlightLinenums: function() {
+    var app = findHost(this);
+    if (typeof app.options.includeCodeHighlightLinenums === 'boolean') {
+      return app.options.includeCodeHighlightLinenums;
+    } else {
+      return true;
+    }
+  },
+
   includeHighlightStyle: function() {
     var app = findHost(this);
     if (typeof app.options.includeHighlightStyle === 'boolean') {
@@ -72,5 +81,9 @@ module.exports = {
     if (this.includeHighlightStyle()) {
       app.import('vendor/highlight-style.css');
     }
+    if (this.includeCodeHighlightLinenums()) {
+      app.import('vendor/code-highlight-linenums.js');
+    }
+    app.import('vendor/shims/code-highlight-linenums.js');
   }
 };

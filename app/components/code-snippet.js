@@ -1,5 +1,6 @@
 import Ember from "ember";
 import Snippets from "../snippets";
+import codeHighlightLinenums from "code-highlight-linenums";
 
 /* global require */
 var Highlight = self.require('highlight.js');
@@ -7,7 +8,9 @@ var Highlight = self.require('highlight.js');
 export default Ember.Component.extend({
   tagName: 'pre',
   classNameBindings: ['language'],
+  classNames: ['code-snippet'],
   unindent: true,
+  lineNumbers: false,
 
   _unindent: function(src) {
     if (!this.get('unindent')) {
@@ -27,15 +30,24 @@ export default Ember.Component.extend({
   },
 
   source: Ember.computed('name', function(){
-    return this._unindent(
+    const source = this._unindent(
       (Snippets[this.get('name')] || "")
         .replace(/^(\s*\n)*/, '')
         .replace(/\s*$/, '')
     );
+    if (this.get('lineNumbers')) {
+      const lang = this.get('language');
+      return codeHighlightLinenums(source, {hljs:Highlight, lang, start:1 })
+    }
+
+    return source;
+
   }),
 
   didInsertElement: function(){
-    Highlight.highlightBlock(this.get('element'));
+    if(!this.get('lineNumbers')) {
+      Highlight.highlightBlock(this.get('element'));
+    }
   },
 
   language: Ember.computed('name', function(){

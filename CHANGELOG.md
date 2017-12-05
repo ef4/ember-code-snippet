@@ -5,3 +5,7 @@
  - ENHANCEMENT: you can now disable the automatic inclusion of our default theme and provide one of the other highlight.js themes. See "Theming Support" in the README.
 
  - ENHANCEMENT: detect nested code snippets (PR #42 by @defreeman)
+
+# 2.1.0
+
+ - ENHANCEMENT: Add code line numbers with code-highlight-linenums
