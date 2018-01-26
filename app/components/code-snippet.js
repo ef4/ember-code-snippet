@@ -27,8 +27,12 @@ export default Ember.Component.extend({
   },
 
   source: Ember.computed('name', function(){
+    var snippet = this.get('name')
+      .split('/')
+      .reduce((dir, name) => dir && dir[name], Snippets);
+
     return this._unindent(
-      (Snippets[this.get('name')] || "")
+      (snippet || "")
         .replace(/^(\s*\n)*/, '')
         .replace(/\s*$/, '')
     );
