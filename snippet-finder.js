@@ -50,26 +50,30 @@ function extractSnippets(fileContent, regexes) {
 }
 
 
-function SnippetFinder(inputTree, snippetRegexes) {
+function SnippetFinder(inputTree, options) {
   if (!(this instanceof SnippetFinder)) {
-    return new SnippetFinder(inputTree, snippetRegexes);
+    return new SnippetFinder(inputTree, options);
   }
   this.inputTree = inputTree;
-  this.snippetRegexes = snippetRegexes;
+  this.options = options;
 }
 
 SnippetFinder.prototype = Object.create(Writer.prototype);
 SnippetFinder.prototype.constructor = SnippetFinder;
 
 SnippetFinder.prototype.write = function (readTree, destDir) {
-  var regexes = this.snippetRegexes;
+  var regexes = this.options.snippetRegexes;
+  var includeExtensions = this.options.includeExtensions;
 
   return readTree(this.inputTree).then(findFiles).then(function(files){
     files.forEach(function(filename){
       var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
       for (var name in snippets){
-        fs.writeFileSync(path.join(destDir, name)+path.extname(filename),
-                         snippets[name]);
+        var destFile = path.join(destDir, name);
+        if (includeExtensions) {
+          destFile += path.extname(filename);
+        }
+        fs.writeFileSync(destFile, snippets[name]);
       }
     });
   });

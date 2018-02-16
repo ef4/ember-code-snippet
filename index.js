@@ -28,6 +28,11 @@ module.exports = {
     }].concat(app.options.snippetRegexes || []);
   },
 
+  includeExtensions: function() {
+    var app = findHost(this);
+    return app.options.includeFileExtensionInSnippetNames !== false;
+  },
+
   includeHighlightJS: function() {
     var app = findHost(this);
     if (typeof app.options.includeHighlightJS === 'boolean') {
@@ -51,9 +56,13 @@ module.exports = {
       return fs.existsSync(path);
     }));
 
-    var snippetRegexes = this.snippetRegexes();
+    var snippetOptions = {
+      snippetRegexes: this.snippetRegexes(),
+      includeExtensions: this.includeExtensions()
+    };
+
     snippets = mergeTrees(this.snippetSearchPaths().map(function(path){
-      return snippetFinder(path, snippetRegexes);
+      return snippetFinder(path, snippetOptions);
     }).concat(snippets));
 
     snippets = flatiron(snippets, {

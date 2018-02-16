@@ -113,6 +113,14 @@ var app = new EmberApp({
 });
 ```
 
+By default, the file extension from the containing file will automatically be included in the snippet name. For instance, the example above has `BEGIN-SNIPPET my-nice-example` in the JS source, and is subsequently referenced as `"my-nice-example.js"`. To disable this behavior, use the `includeFileExtensionInSnippetNames` option:
+
+```js
+var app = new EmberApp({
+  includeFileExtensionInSnippetNames: false
+});
+```
+
 # Syntax Highlighting Language Support
 
 We depend on [highlight.js](http://highlightjs.org/) for syntax highlighting. It supports 176 languages. But you probably don't want to build all of those into your app.
@@ -127,7 +135,7 @@ Out of the box, we only enable:
  - markdown
  - handlebars
  - htmlbars
- 
+
 If you want a different set, you can:
 
 1. Tell ember-code-snippet not to include highlight.js automatically for you:
@@ -146,7 +154,7 @@ If you want a different set, you can:
 4. Import it directly from your ember-cli-build.js file:
 
 ```js
-app.import('vendor/highlight.pack.js', { 
+app.import('vendor/highlight.pack.js', {
   using: [ { transformation: 'amd', as: 'highlight.js' } ]
 });
 ```
