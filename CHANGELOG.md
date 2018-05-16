@@ -1,3 +1,7 @@
+# 2.2.0
+
+ - ENHANCEMENT: Add support for snippets in YAML files by @acdn-sglanzer
+
 # 2.1.0
 
  - ENHANCEMENT: Allow excluding the file extension from the snippet name by @dfreeman
