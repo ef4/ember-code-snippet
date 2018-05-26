@@ -8,7 +8,7 @@ var snippetFinder = require('./snippet-finder');
 var findHost = require('./utils/findHost');
 
 module.exports = {
-  name: 'Code Snippet Ember Component',
+  name: 'ember-code-snippet',
 
   snippetPaths: function() {
     var app = findHost(this);
