@@ -1,3 +1,7 @@
+# 2.2.1
+
+ - BUGFIX: make index.js name match NPM package name by @esbanarango
+
 # 2.2.0
 
  - ENHANCEMENT: Add support for snippets in YAML files by @acdn-sglanzer
