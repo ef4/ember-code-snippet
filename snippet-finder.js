@@ -1,6 +1,7 @@
 /* jshint node: true */
+/* use strict */
 
-var Writer = require('broccoli-writer');
+var Plugin = require('broccoli-plugin');
 var glob = require('glob');
 var _Promise = require('es6-promise').Promise;
 var fs = require('fs');
@@ -49,27 +50,33 @@ function extractSnippets(fileContent, regexes) {
   return output;
 }
 
-
-function SnippetFinder(inputTree, options) {
+function SnippetFinder(inputNode, options) {
   if (!(this instanceof SnippetFinder)) {
-    return new SnippetFinder(inputTree, options);
+    return new SnippetFinder(inputNode, options);
   }
-  this.inputTree = inputTree;
+
+  Plugin.call(this, [inputNode], {
+    name: 'SnippetFinder',
+    annotation: `SnippetFinder output: ${options.outputFile}`,
+    persistentOutput: options.persistentOutput,
+    needCache: options.needCache,
+  });
+
   this.options = options;
 }
 
-SnippetFinder.prototype = Object.create(Writer.prototype);
+SnippetFinder.prototype = Object.create(Plugin.prototype);
 SnippetFinder.prototype.constructor = SnippetFinder;
 
-SnippetFinder.prototype.write = function (readTree, destDir) {
+SnippetFinder.prototype.build = function() {
   var regexes = this.options.snippetRegexes;
   var includeExtensions = this.options.includeExtensions;
 
-  return readTree(this.inputTree).then(findFiles).then(function(files){
-    files.forEach(function(filename){
+  return findFiles(this.inputPaths[0]).then((files) => {
+    files.forEach(function(filename) {
       var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
-      for (var name in snippets){
-        var destFile = path.join(destDir, name);
+      for (var name in snippets) {
+        var destFile = path.join(this.outputPath, name);
         if (includeExtensions) {
           destFile += path.extname(filename);
         }
