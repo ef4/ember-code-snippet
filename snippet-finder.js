@@ -50,6 +50,21 @@ function extractSnippets(fileContent, regexes) {
   return output;
 }
 
+function writeSnippets(files, outputPath, options) {
+  files.forEach((filename) => {
+    var regexes = options.snippetRegexes;
+    var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
+    for (var name in snippets) {
+      var destFile = path.join(outputPath, name);
+      var includeExtensions = options.includeExtensions;
+      if (includeExtensions) {
+        destFile += path.extname(filename);
+      }
+      fs.writeFileSync(destFile, snippets[name]);
+    }
+  });
+}
+
 function SnippetFinder(inputNode, options) {
   if (!(this instanceof SnippetFinder)) {
     return new SnippetFinder(inputNode, options);
@@ -69,20 +84,8 @@ SnippetFinder.prototype = Object.create(Plugin.prototype);
 SnippetFinder.prototype.constructor = SnippetFinder;
 
 SnippetFinder.prototype.build = function() {
-  var regexes = this.options.snippetRegexes;
-  var includeExtensions = this.options.includeExtensions;
-
   return findFiles(this.inputPaths[0]).then((files) => {
-    files.forEach(function(filename) {
-      var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
-      for (var name in snippets) {
-        var destFile = path.join(this.outputPath, name);
-        if (includeExtensions) {
-          destFile += path.extname(filename);
-        }
-        fs.writeFileSync(destFile, snippets[name]);
-      }
-    });
+    writeSnippets(files, this.outputPath, this.options);
   });
 };
 
