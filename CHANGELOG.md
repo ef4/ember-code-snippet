@@ -1,3 +1,7 @@
+# 2.2.2
+
+ - HOUSEKEEPING: fix broccoli 2 deprecations, thanks @dcyriller
+
 # 2.2.1
 
  - BUGFIX: make index.js name match NPM package name by @esbanarango
