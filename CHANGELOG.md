@@ -1,3 +1,7 @@
+# 2.3.0
+
+ - ENHANCEMENT: add TypeScript to the default list of file types we will examine for snippets. Thanks @aaxelb.
+
 # 2.2.2
 
  - HOUSEKEEPING: fix broccoli 2 deprecations, thanks @dcyriller
