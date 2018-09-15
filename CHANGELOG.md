@@ -1,3 +1,7 @@
+# 2.3.1
+
+ - HOUSEKEEPING: bumping a deprecated glob dep. Thanks @AndreJoaquim.
+
 # 2.3.0
 
  - ENHANCEMENT: add TypeScript to the default list of file types we will examine for snippets. Thanks @aaxelb.
