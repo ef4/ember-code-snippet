@@ -64,6 +64,8 @@ export default Ember.Component.extend({
         return 'emblem';
       case 'ts':
         return 'typescript';
+      default:
+        return m[1].toLowerCase();
       }
     }
   })
