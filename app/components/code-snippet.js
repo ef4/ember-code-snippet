@@ -2,7 +2,7 @@ import Ember from "ember";
 import Snippets from "../snippets";
 
 /* global require */
-var Highlight = self.require('highlight.js');
+// var Highlight = self.require('highlight.js');
 
 export default Ember.Component.extend({
   tagName: 'pre',
@@ -39,10 +39,12 @@ export default Ember.Component.extend({
   }),
 
   didInsertElement: function(){
-    Highlight.highlightBlock(this.get('element'));
+    // Highlight.highlightBlock(this.get('element'));
   },
 
-  language: Ember.computed('name', function(){
+  language: Ember.computed('name', 'lang', function(){
+    if (this.lang) return this.lang;
+
     var m = /\.(\w+)$/i.exec(this.get('name'));
     if (m) {
       switch (m[1].toLowerCase()) {
