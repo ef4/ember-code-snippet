@@ -8,9 +8,10 @@ var fs = require('fs');
 var path = require('path');
 
 
-function findFiles(srcDir) {
+function findFiles(srcDir, options) {
+  var fileNamePattern = `**/*.+(${options.snippetExtensions.join('|')})`;
   return new _Promise(function(resolve, reject) {
-    glob(path.join(srcDir, "**/*.+(js|ts|coffee|html|hbs|md|css|sass|scss|less|emblem|yaml)"), function (err, files) {
+    glob(path.join(srcDir, fileNamePattern), function (err, files) {
       if (err) {
         reject(err);
       } else {
@@ -84,7 +85,7 @@ SnippetFinder.prototype = Object.create(Plugin.prototype);
 SnippetFinder.prototype.constructor = SnippetFinder;
 
 SnippetFinder.prototype.build = function() {
-  return findFiles(this.inputPaths[0]).then((files) => {
+  return findFiles(this.inputPaths[0], this.options).then((files) => {
     writeSnippets(files, this.outputPath, this.options);
   });
 };

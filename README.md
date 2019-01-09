@@ -138,12 +138,13 @@ Out of the box, we only enable:
 
 If you want a different set, you can:
 
-1. Tell ember-code-snippet not to include highlight.js automatically for you:
+1. Tell ember-code-snippet not to include highlight.js automatically for you. Also, include an array of file extensions corresponding to the languages you want to use. If ```snippetExtensions``` is not defined, the file extensions corresponding to the default list of supported languages will be used.
 
 ```js
   // in ember-cli-build.js
   var app = new EmberApp(defaults, {
-    includeHighlightJS: false
+    includeHighlightJS: false,
+    snippetExtensions: ['js','java','php']
   });
 ```
 
