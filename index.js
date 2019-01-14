@@ -28,6 +28,11 @@ module.exports = {
     }].concat(app.options.snippetRegexes || []);
   },
 
+  snippetExtensions: function() {
+    var app = findHost(this);
+    return app.options.snippetExtensions || ['js','ts','coffee','html','hbs','md','css','sass','scss','less','emblem','yaml'];
+  },
+
   includeExtensions: function() {
     var app = findHost(this);
     return app.options.includeFileExtensionInSnippetNames !== false;
@@ -58,7 +63,8 @@ module.exports = {
 
     var snippetOptions = {
       snippetRegexes: this.snippetRegexes(),
-      includeExtensions: this.includeExtensions()
+      includeExtensions: this.includeExtensions(),
+      snippetExtensions: this.snippetExtensions()
     };
 
     snippets = mergeTrees(this.snippetSearchPaths().map(function(path){
