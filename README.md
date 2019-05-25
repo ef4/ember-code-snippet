@@ -11,10 +11,11 @@ application itself.
 - the component uses file extensions to help highlight.js guess the
   right language. See below for details on choosing the supported languages.
 
-Install
--------
 
-``` sh
+Installation
+------------------------------------------------------------------------------
+
+```
 ember install ember-code-snippet
 ```
 

@@ -1,45 +1,44 @@
-/*jshint node: true */
 'use strict';
 
-var fs   = require('fs');
-var mergeTrees = require('broccoli-merge-trees');
-var flatiron = require('broccoli-flatiron');
-var snippetFinder = require('./snippet-finder');
-var findHost = require('./utils/findHost');
+const fs   = require('fs');
+const mergeTrees = require('broccoli-merge-trees');
+const flatiron = require('broccoli-flatiron');
+const snippetFinder = require('./snippet-finder');
+const findHost = require('./utils/findHost');
 
 module.exports = {
-  name: 'ember-code-snippet',
+  name: require('./package').name,
 
-  snippetPaths: function() {
-    var app = findHost(this);
+  snippetPaths() {
+    let app = findHost(this);
     return app.options.snippetPaths || ['snippets'];
   },
 
-  snippetSearchPaths: function(){
-    var app = findHost(this);
+  snippetSearchPaths(){
+    let app = findHost(this);
     return app.options.snippetSearchPaths || ['app'];
   },
 
-  snippetRegexes: function() {
-    var app = findHost(this);
+  snippetRegexes() {
+    let app = findHost(this);
     return [{
       begin: /\bBEGIN-SNIPPET\s+(\S+)\b/,
       end: /\bEND-SNIPPET\b/
     }].concat(app.options.snippetRegexes || []);
   },
 
-  snippetExtensions: function() {
-    var app = findHost(this);
+  snippetExtensions() {
+    let app = findHost(this);
     return app.options.snippetExtensions || ['js','ts','coffee','html','hbs','md','css','sass','scss','less','emblem','yaml'];
   },
 
-  includeExtensions: function() {
-    var app = findHost(this);
+  includeExtensions() {
+    let app = findHost(this);
     return app.options.includeFileExtensionInSnippetNames !== false;
   },
 
-  includeHighlightJS: function() {
-    var app = findHost(this);
+  includeHighlightJS() {
+    let app = findHost(this);
     if (typeof app.options.includeHighlightJS === 'boolean') {
       return app.options.includeHighlightJS;
     } else {
@@ -47,8 +46,8 @@ module.exports = {
     }
   },
 
-  includeHighlightStyle: function() {
-    var app = findHost(this);
+  includeHighlightStyle() {
+    let app = findHost(this);
     if (typeof app.options.includeHighlightStyle === 'boolean') {
       return app.options.includeHighlightStyle;
     } else {
@@ -56,12 +55,12 @@ module.exports = {
     }
   },
 
-  treeForApp: function(tree){
-    var snippets = mergeTrees(this.snippetPaths().filter(function(path){
+  treeForApp(tree) {
+    let snippets = mergeTrees(this.snippetPaths().filter(function(path){
       return fs.existsSync(path);
     }));
 
-    var snippetOptions = {
+    let snippetOptions = {
       snippetRegexes: this.snippetRegexes(),
       includeExtensions: this.includeExtensions(),
       snippetExtensions: this.snippetExtensions()
@@ -78,11 +77,11 @@ module.exports = {
     return mergeTrees([tree, snippets]);
   },
 
-  included: function(app) {
+  included(app) {
     if (this.includeHighlightJS()) {
       app.import('vendor/highlight.pack.js', { using: [
-        { transformation: 'amd', as: 'highlight.js' }
-      ] } );
+          { transformation: 'amd', as: 'highlight.js' }
+        ] } );
     }
     if (this.includeHighlightStyle()) {
       app.import('vendor/highlight-style.css');
