@@ -1,15 +1,14 @@
-/* jshint node: true */
 /* use strict */
 
-var Plugin = require('broccoli-plugin');
-var glob = require('glob');
-var _Promise = require('es6-promise').Promise;
-var fs = require('fs');
-var path = require('path');
+const Plugin = require('broccoli-plugin');
+const glob = require('glob');
+const _Promise = require('es6-promise').Promise;
+const fs = require('fs');
+const path = require('path');
 
 
 function findFiles(srcDir, options) {
-  var fileNamePattern = `**/*.+(${options.snippetExtensions.join('|')})`;
+  let fileNamePattern = `**/*.+(${options.snippetExtensions.join('|')})`;
   return new _Promise(function(resolve, reject) {
     glob(path.join(srcDir, fileNamePattern), function (err, files) {
       if (err) {
@@ -22,10 +21,10 @@ function findFiles(srcDir, options) {
 }
 
 function extractSnippets(fileContent, regexes) {
-  var stack = [];
-  var output = {};
+  let stack = [];
+  let output = {};
   fileContent.split("\n").forEach(function(line){
-    var top = stack[stack.length - 1];
+    let top = stack[stack.length - 1];
     if (top && top.regex.end.test(line)) {
       output[top.name] = top.content.join("\n");
       stack.pop();
@@ -35,8 +34,8 @@ function extractSnippets(fileContent, regexes) {
       snippet.content.push(line);
     });
 
-    var match;
-    var regex = regexes.find(function(regex) {
+    let match;
+    let regex = regexes.find(function(regex) {
       return match = regex.begin.exec(line);
     });
 
@@ -53,11 +52,11 @@ function extractSnippets(fileContent, regexes) {
 
 function writeSnippets(files, outputPath, options) {
   files.forEach((filename) => {
-    var regexes = options.snippetRegexes;
-    var snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
-    for (var name in snippets) {
-      var destFile = path.join(outputPath, name);
-      var includeExtensions = options.includeExtensions;
+    let regexes = options.snippetRegexes;
+    let snippets = extractSnippets(fs.readFileSync(filename, 'utf-8'), regexes);
+    for (let name in snippets) {
+      let destFile = path.join(outputPath, name);
+      let includeExtensions = options.includeExtensions;
       if (includeExtensions) {
         destFile += path.extname(filename);
       }
