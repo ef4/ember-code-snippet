@@ -11,6 +11,12 @@ application itself.
 - the component uses file extensions to help highlight.js guess the
   right language. See below for details on choosing the supported languages.
 
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
 
 Installation
 ------------------------------------------------------------------------------
@@ -20,7 +26,7 @@ ember install ember-code-snippet
 ```
 
 Usage
------
+------------------------------------------------------------------------------
 
 There are two ways to store your code snippets. You can use either or
 both together.
@@ -183,3 +189,15 @@ To use a different theme:
 ```js
 app.import('vendor/my-highlight-style.css');
 ```
+
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).
