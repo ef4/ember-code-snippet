@@ -27,7 +27,9 @@ module.exports = {
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
-        'tests/dummy/config/**/*.js'
+        'tests/dummy/config/**/*.js',
+        'snippet-finder.js',
+        'utils/**/*.js'
       ],
       excludedFiles: [
         'addon/**',
