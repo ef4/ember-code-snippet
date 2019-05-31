@@ -21,22 +21,27 @@
 <h3>Dynamic snippet</h3>
 
 <div>
-  <label for="type">Type:</label>
-  {{input id="type" value=type}}
+  <label for="type">Input type:</label>
+  {{input id="type" value=inputType}}
 </div>
+
+<hr>
 
 <!-- BEGIN-SNIPPET dynamic -->
 <p>I am a <strong>handlebars</strong> template!</p>
 <p>The value is: {{val}}</p>
 <div>
-  {{input value=val type=type}}
+  {{input value=val type=inputType}}
 </div>
 <!-- END-SNIPPET -->
 
-{{#code-block language="handlebars"}}
-  {{#let (get-code-snippet "dynamic.hbs") as |snippet|}}
+{{#let (get-code-snippet "dynamic.hbs") as |snippet|}}
 <pre class={{snippet.language}}>
-{{unindent-code-snippet snippet.source}}
+{{dynamic-code-snippet snippet.source
+  language=snippet.language
+  dynamic=(hash
+    inputType=inputType
+  )
+}}
 </pre>
-  {{/let}}
-{{/code-block}}
+{{/let}}
