@@ -1,1 +1,5 @@
-{{source}}
+{{#let (get-code-snippet name) as |snippet|}}
+<pre class={{snippet.language}}>
+{{if unindent (unindent-code-snippet snippet.source) snippet.source}}
+</pre>
+{{/let}}

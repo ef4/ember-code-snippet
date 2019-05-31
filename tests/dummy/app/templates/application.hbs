@@ -3,14 +3,20 @@
 <h3>Static snippet</h3>
 
 <!-- BEGIN-SNIPPET static -->
-<p>I am a <strong>handlebars</strong> template!</p>
-<p>The value is: {{val}}</p>
-<div>
-  {{input value=val}}
-</div>
+    <p>I am a <strong>handlebars</strong> template!</p>
+    <p>The value is: {{val}}</p>
+    <div>
+      {{input value=val}}
+    </div>
 <!-- END-SNIPPET -->
 
+<h4>Plain:</h4>
+
 {{code-snippet name="static.hbs"}}
+
+<h4>Prism.js</h4>
+
+{{#code-block language="handlebars"}}{{code-snippet name="dynamic.hbs"}}{{/code-block}}
 
 <h3>Dynamic snippet</h3>
 
@@ -27,4 +33,10 @@
 </div>
 <!-- END-SNIPPET -->
 
-{{#code-block language="handlebars"}}{{code-snippet name="dynamic.hbs"}}{{/code-block}}
+{{#code-block language="handlebars"}}
+  {{#let (get-code-snippet "dynamic.hbs") as |snippet|}}
+<pre class={{snippet.language}}>
+{{unindent-code-snippet snippet.source}}
+</pre>
+  {{/let}}
+{{/code-block}}
