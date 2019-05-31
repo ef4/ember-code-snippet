@@ -37,25 +37,7 @@ module.exports = {
     return app.options.includeFileExtensionInSnippetNames !== false;
   },
 
-  includeHighlightJS() {
-    let app = findHost(this);
-    if (typeof app.options.includeHighlightJS === 'boolean') {
-      return app.options.includeHighlightJS;
-    } else {
-      return true;
-    }
-  },
-
-  includeHighlightStyle() {
-    let app = findHost(this);
-    if (typeof app.options.includeHighlightStyle === 'boolean') {
-      return app.options.includeHighlightStyle;
-    } else {
-      return true;
-    }
-  },
-
-  treeForApp(tree) {
+  treeForAddon(tree) {
     let snippets = mergeTrees(this.snippetPaths().filter(function(path){
       return fs.existsSync(path);
     }));
@@ -74,17 +56,6 @@ module.exports = {
       outputFile: 'snippets.js'
     });
 
-    return mergeTrees([tree, snippets]);
-  },
-
-  included(app) {
-    if (this.includeHighlightJS()) {
-      app.import('vendor/highlight.pack.js', { using: [
-          { transformation: 'amd', as: 'highlight.js' }
-        ] } );
-    }
-    if (this.includeHighlightStyle()) {
-      app.import('vendor/highlight-style.css');
-    }
+    return this._super.treeForAddon.call(this, mergeTrees([tree, snippets]));
   }
 };

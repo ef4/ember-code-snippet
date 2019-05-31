@@ -1,8 +1,7 @@
 import layout from '../templates/components/code-snippet';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-
-const Highlight = self.require('highlight.js');
+import snippets from 'ember-code-snippet/snippets';
 
 export default Component.extend({
   layout,
@@ -30,7 +29,7 @@ export default Component.extend({
   source: computed('name', function(){
     let snippet = this.get('name')
       .split('/')
-      .reduce((dir, name) => dir && dir[name], this.snippets);
+      .reduce((dir, name) => dir && dir[name], snippets);
 
     return this._unindent(
       (snippet || "")
@@ -38,10 +37,6 @@ export default Component.extend({
         .replace(/\s*$/, '')
     );
   }),
-
-  didInsertElement(){
-    Highlight.highlightBlock(this.get('element'));
-  },
 
   language: computed('name', function(){
     let m = /\.(\w+)$/i.exec(this.get('name'));

@@ -1,3 +1,30 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Welcome to ember-code-snippet</h2>
 
-{{outlet}}
+<h3>Static snippet</h3>
+
+<!-- BEGIN-SNIPPET static -->
+<p>I am a <strong>handlebars</strong> template!</p>
+<p>The value is: {{val}}</p>
+<div>
+  {{input value=val}}
+</div>
+<!-- END-SNIPPET -->
+
+{{code-snippet name="static.hbs"}}
+
+<h3>Dynamic snippet</h3>
+
+<div>
+  <label for="type">Type:</label>
+  {{input id="type" value=type}}
+</div>
+
+<!-- BEGIN-SNIPPET dynamic -->
+<p>I am a <strong>handlebars</strong> template!</p>
+<p>The value is: {{val}}</p>
+<div>
+  {{input value=val type=type}}
+</div>
+<!-- END-SNIPPET -->
+
+{{#code-block language="handlebars"}}{{code-snippet name="dynamic.hbs"}}{{/code-block}}
