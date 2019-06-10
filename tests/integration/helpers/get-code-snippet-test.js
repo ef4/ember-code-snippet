@@ -14,11 +14,11 @@ module('Integration | Helper | get-code-snippet', function(hooks) {
       };
       // END-SNIPPET
       
-      {{#let (get-code-snippet "render-test.js") as |snippet|}}
+      {{#with (get-code-snippet "render-test.js") as |snippet|}}
         <div id="source">{{snippet.source}}</div>
         <div id="language">{{snippet.language}}</div>
         <div id="extension">{{snippet.extension}}</div>
-      {{/let}}
+      {{/with}}
     `);
 
     assert.dom('#source').hasText('function sample(){\n  return 42;\n};');
@@ -34,11 +34,11 @@ module('Integration | Helper | get-code-snippet', function(hooks) {
       };
       // END-SNIPPET
       
-      {{#let (get-code-snippet "render-test.js" unintent=false) as |snippet|}}
+      {{#with (get-code-snippet "render-test.js" unintent=false) as |snippet|}}
         <div id="source">{{snippet.source}}</div>
         <div id="language">{{snippet.language}}</div>
         <div id="extension">{{snippet.extension}}</div>
-      {{/let}}
+      {{/with}}
     `);
 
     assert.dom('#source').hasText('      function sample(){\n        return 42;\n      };');
