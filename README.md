@@ -110,7 +110,7 @@ var app = new EmberApp({
 });
 ```
 
-### get-code-snippet helper
+### Helper usage
 
 After you have defined your snippets, you can use the `get-code-snippet` helper to get the snippet data
 for rendering: `{{get-code-snippet "my-nice-example.js"}}`. The returned value will be a JavaScript object with the
@@ -146,6 +146,18 @@ primitives of this addon. The following is an example of rendering a code snippe
 ```hbs
 {{#code-block language="handlebars"}}{{get (get-code-snippet "demo.hbs") "source"}}{{/code-block}}
 ```
+
+### JavaScript usage
+
+When you want to use the code snippet functionality from JavaScript, you can import the `getCodeSnippet` function like
+this:
+
+```js
+import { getCodeSnippet } from 'ember-code-snippet';
+```
+
+Its call signature is similar to the helper invocation: `getCodeSnippet(name, unindent = true)`, and it returns the same
+POJO as described above.
 
 
 Contributing

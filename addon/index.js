@@ -1,7 +1,5 @@
-import getSnippet from './-private/get-snippet';
-import unindent from './-private/unindent';
+import getCodeSnippet from './-private/get-snippet';
 
 export {
-  getSnippet,
-  unindent
+  getCodeSnippet
 };
