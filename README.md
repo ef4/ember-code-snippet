@@ -1,15 +1,10 @@
-Code Snippet Ember Component
+Code Snippet Ember Helper
 ============================
 
-This is an Ember component (and ember-cli addon) that lets you render
+This is an Ember helper (and ember-cli addon) that lets you render
 code snippets within your app. The code snippets can live in their own
 dedicated files or you can extract blocks of code from your
 application itself.
-
-- Syntax highlighting thanks to [highlight.js](http://highlightjs.org/). To see how it looks, [view the highlightjs previews](https://highlightjs.org/).
-- ember-cli's auto-reload will pick up changes to any of the snippet files.
-- the component uses file extensions to help highlight.js guess the
-  right language. See below for details on choosing the supported languages.
 
 Compatibility
 ------------------------------------------------------------------------------
@@ -28,10 +23,12 @@ ember install ember-code-snippet
 Usage
 ------------------------------------------------------------------------------
 
+### Defining snippets
+
 There are two ways to store your code snippets. You can use either or
 both together.
 
-### With separate snippet files
+#### With separate snippet files
 
 Create a new "snippets" directory at the top level of your ember-cli
 application or addon, and place the code snippets you'd like to render in their
@@ -61,7 +58,7 @@ var app = new EmberAddon({
 });
 ```
 
-### From within your application source
+#### From within your application source
 
 In any file under your `app` tree, annotate the start and end of a
 code snippet block by placing comments like this:
@@ -78,15 +75,9 @@ The above is a Javascript example, but you can use any language's
 comment format. We're just looking for lines that match
 `/\bBEGIN-SNIPPET\s+(\S+)\b/` and `/\bEND-SNIPPET\b/`.
 
-The opening comment must include a name. The component will identify
+The opening comment must include a name. The helper will identify
 these snippets using the names you specified plus the file extension
-of the file in which they appeared (which helps us detect languages
-for better highlighting). So the above example could be included in a
-template like this:
-
-```hbs
-{{code-snippet name="my-nice-example.js"}}
-```
+of the file in which they appeared. 
 
 You can also define your own regex to find snippets. Just use the `snippetRegexes` option:
 
@@ -100,15 +91,6 @@ var app = new EmberAddon({
 ```
 
 In the regex above everything in the `element-example` component block will be a snippet! Just make sure the first regex capture group is the name of the snippet.
-
-By default, the component will try to unindent the code block by
-removing whitespace characters from the start of each line until the
-code bumps up against the edge. You can disable this with:
-
-```hbs
-{{code-snippet name="my-nice-example.js" unindent=false}}
-```
-
 
 You can choose which paths will be searched for inline snippets by
 settings the snippetSearchPaths option when creating your application
@@ -128,66 +110,41 @@ var app = new EmberApp({
 });
 ```
 
-# Syntax Highlighting Language Support
+### get-code-snippet helper
 
-We depend on [highlight.js](http://highlightjs.org/) for syntax highlighting. It supports 176 languages. But you probably don't want to build all of those into your app.
+After you have defined your snippets, you can use the `get-code-snippet` helper to get the snippet data
+for rendering: `{{get-code-snippet "my-nice-example.js"}}`. The returned value will be a JavaScript object with the
+following properties:
 
-Out of the box, we only enable:
+* `source`: the source code extracted from the given snippet
+* `language`: the snippets language, following the naming conventions of the popular `highlight.js` library, e.g. `htmlbars` for Ember templates
+* `extension`: the file extension of the file containing the given snippet
 
- - css
- - coffeescript
- - html/xml
- - json
- - javascript
- - markdown
- - handlebars
- - htmlbars
+By default, the helper will try to unindent the code block by
+removing whitespace characters from the start of each line until the
+code bumps up against the edge. You can disable this with:
 
-If you want a different set, you can:
-
-1. Tell ember-code-snippet not to include highlight.js automatically for you. Also, include an array of file extensions corresponding to the languages you want to use. If ```snippetExtensions``` is not defined, the file extensions corresponding to the default list of supported languages will be used.
-
-```js
-  // in ember-cli-build.js
-  var app = new EmberApp(defaults, {
-    includeHighlightJS: false,
-    snippetExtensions: ['js','java','php']
-  });
+```hbs
+{{get-code-snippet "my-nice-example.js" unindent=false}}
 ```
 
-2. Go to https://highlightjs.org/download/ and generate your own build of highlight.js using the languages you want.
+The following example will render a `<pre>` tag with a given code snippet:
 
-3. Place the resulting highlight.pack.js in your `vendor` directory.
-
-4. Import it directly from your ember-cli-build.js file:
-
-```js
-app.import('vendor/highlight.pack.js', {
-  using: [ { transformation: 'amd', as: 'highlight.js' } ]
-});
+```hbs
+{{#let (get-code-snippet "static.hbs") as |snippet|}}
+<pre class={{snippet.language}}>{{snippet.source}}</pre>
+{{/let}}
 ```
 
-# Theming Support
+### Syntax Highlighting
 
-We include a basic syntax-highlighting theme by default, but highlight.js has 79 different themes to choose from and it's possible to make your own just by writing a stylesheet.
+This addon does not provide any syntax highlighting capabilities itself, but instead it is designed with composability 
+in mind, so you can add highlighting capabilities with any highlighting library on top of the snippet extraction 
+primitives of this addon. The following is an example of rendering a code snippet using code highlighting provided by the 
+[ember-prism](https://github.com/shipshapecode/ember-prism) addon:
 
-To use a different theme:
-
-1. Tell ember-code-snippet not to include its own theme:
-
-```js
-  // in ember-cli-build.js
-  var app = new EmberApp(defaults, {
-    includeHighlightStyle: false
-  });
-```
-
-2. Place your chosen style in `vendor`.
-
-3. Import it directly from your ember-cli-build.js:
-
-```js
-app.import('vendor/my-highlight-style.css');
+```hbs
+{{#code-block language="handlebars"}}{{get (get-code-snippet "demo.hbs") "source"}}{{/code-block}}
 ```
 
 
