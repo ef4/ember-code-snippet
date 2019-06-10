@@ -12,11 +12,13 @@
 
 <h4>Plain:</h4>
 
-{{code-snippet name="static.hbs"}}
+{{#let (get-code-snippet "static.hbs") as |snippet|}}
+<pre class={{snippet.language}}>{{snippet.source}}</pre>
+{{/let}}
 
 <h4>Prism.js</h4>
 
-{{#code-block language="handlebars"}}{{code-snippet name="dynamic.hbs"}}{{/code-block}}
+{{#code-block language="handlebars"}}{{get (get-code-snippet "dynamic.hbs") "source"}}{{/code-block}}
 
 <h3>Dynamic snippet</h3>
 
