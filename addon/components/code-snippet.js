@@ -14,7 +14,8 @@ export default Component.extend({
     if (!this.get('unindent')) {
       return src;
     }
-    let match, min, lines = src.split("\n").filter(l => l !== '');
+    let match, min;
+    var lines = src.match(/[^\r\n]+/g); // Split in non-empty lines (both linux + windows)
     for (let i = 0; i < lines.length; i++) {
       match = /^[ \t]*/.exec(lines[i]);
       if (match && (typeof min === 'undefined' || min > match[0].length)) {
@@ -34,7 +35,7 @@ export default Component.extend({
 
     return this._unindent(
       (snippet || "")
-        .replace(/^(\s*\n)*/, '')
+        .replace(/^(\s*\n)*/, '') // note: \s already matches \r, no need to check for [whitespace]\r\n
         .replace(/\s*$/, '')
     );
   }),
