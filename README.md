@@ -132,7 +132,7 @@ The following example will render a `<pre>` tag with a given code snippet:
 
 ```hbs
 {{#let (get-code-snippet "static.hbs") as |snippet|}}
-<pre class={{snippet.language}}>{{snippet.source}}</pre>
+  <pre class={{snippet.language}}>{{snippet.source}}</pre>
 {{/let}}
 ```
 
@@ -144,7 +144,25 @@ primitives of this addon. The following is an example of rendering a code snippe
 [ember-prism](https://github.com/shipshapecode/ember-prism) addon:
 
 ```hbs
-{{#code-block language="handlebars"}}{{get (get-code-snippet "demo.hbs") "source"}}{{/code-block}}
+{{#let (get-code-snippet "demo.hbs") as |snippet|}}
+  <CodeBlock @language={{snippet.language}}>
+    {{snippet.source}}
+  </CodeBlock>
+{{/let}}
+```
+
+If you want to show multiple snippets, it makes sense to extract that template code into a reusable component. In fact
+previous versions of `ember-code-snippet` shipped a `code-snippet` component, that you can replace now with the new
+helper and your highlighting library of choice. The following template-only component could replace the previously 
+available component `<CodeSnippet @name="demo.hbs" />`, again using `ember-prism` in this case:
+
+```hbs
+{{!-- templates/components/code-snippet.hbs --}}
+{{#let (get-code-snippet @name) as |snippet|}}
+  <CodeBlock @language={{snippet.language}}>
+    {{snippet.source}}
+  </CodeBlock>
+{{/let}}
 ```
 
 ### JavaScript usage
