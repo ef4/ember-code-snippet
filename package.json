@@ -1,6 +1,6 @@
 {
   "name": "ember-code-snippet",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "Ember component for embedding syntax-highlighted code samples.",
   "main": "index.js",
   "author": "Edward Faulkner <ef@alum.mit.edu>",

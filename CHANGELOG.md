@@ -1,3 +1,23 @@
+# 3.0.0
+
+ - BREAKING: ember-code-snippet doesn't provide a built-in syntax highlighting component anymore. Instead, you can combine it with the syntax highlighting component of your choice. A recommended choice is [ember-prism](https://github.com/shipshapecode/ember-prism).
+
+    To upgrade from ember-code-snippet 2.x:
+    1. `ember install ember-prism`
+    2. Create your own `code-snippet` component like:
+
+        ```hbs
+        {{!- get-code-sniippet is provided
+             by ember-code-snippet         }}
+        {{#let (get-code-snippet @name) as |snippet|}}
+          {{!- CodeBlock is provided by ember-prism -}}
+          <CodeBlock @language={{snippet.language}}>
+            {{snippet.source}}
+          </CodeBlock>
+        {{/let}}
+        ```
+
+
 # 2.3.1
 
  - HOUSEKEEPING: bumping a deprecated glob dep. Thanks @AndreJoaquim.
