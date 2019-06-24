@@ -1,3 +1,21 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Welcome to ember-code-snippet</h2>
 
-{{outlet}}
+<h3>Static snippet</h3>
+
+<!-- BEGIN-SNIPPET static -->
+    <p>I am a <strong>handlebars</strong> template!</p>
+    <p>The value is: {{val}}</p>
+    <div>
+      {{input value=val}}
+    </div>
+<!-- END-SNIPPET -->
+
+<h4>Plain:</h4>
+
+{{#let (get-code-snippet "static.hbs") as |snippet|}}
+<pre class={{snippet.language}}>{{snippet.source}}</pre>
+{{/let}}
+
+<h4>Prism.js</h4>
+
+{{#code-block language="handlebars"}}{{get (get-code-snippet "static.hbs") "source"}}{{/code-block}}
