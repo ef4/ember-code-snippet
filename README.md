@@ -117,7 +117,7 @@ for rendering: `{{get-code-snippet "my-nice-example.js"}}`. The returned value w
 following properties:
 
 * `source`: the source code extracted from the given snippet
-* `language`: the snippets language, following the naming conventions of the popular `highlight.js` library, e.g. `htmlbars` for Ember templates
+* `language`: the snippets language, following the naming conventions of the popular `prism.js` library, e.g. `handlebars` for Ember templates
 * `extension`: the file extension of the file containing the given snippet
 
 By default, the helper will try to unindent the code block by

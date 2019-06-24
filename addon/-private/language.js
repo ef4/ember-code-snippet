@@ -9,7 +9,7 @@ export default function getLanguage(name) {
       case 'coffee':
         return 'coffeescript';
       case 'hbs':
-        return 'htmlbars';
+        return 'handlebars';
       case 'css':
         return 'css';
       case 'scss':

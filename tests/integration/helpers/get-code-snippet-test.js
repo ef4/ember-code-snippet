@@ -22,7 +22,7 @@ module('Integration | Helper | get-code-snippet', function(hooks) {
     `);
 
     assert.dom('#source').hasText('function sample(){\n  return 42;\n};');
-    assert.dom('#language').hasText('javascript'); // language is determined by file extension, so JS ini this case
+    assert.dom('#language').hasText('javascript'); // language is determined by file extension, so JS in this case
     assert.dom('#extension').hasText('js');
   });
 
@@ -42,7 +42,7 @@ module('Integration | Helper | get-code-snippet', function(hooks) {
     `);
 
     assert.dom('#source').hasText('      function sample(){\n        return 42;\n      };');
-    assert.dom('#language').hasText('javascript'); // language is determined by file extension, so JS ini this case
+    assert.dom('#language').hasText('javascript'); // language is determined by file extension, so JS in this case
     assert.dom('#extension').hasText('js');
   });
 });

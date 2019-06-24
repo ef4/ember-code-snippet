@@ -18,4 +18,12 @@ module('Unit | getCodeSnippet', function() {
     assert.equal(snippet.language, 'javascript');
     assert.equal(snippet.extension, 'js');
   });
+
+  test('it returns handlebars snippet', async function(assert) {
+    let snippet = getCodeSnippet('static.hbs');
+
+    assert.ok(snippet.source.includes('<p>I am a <strong>handlebars</strong> template!</p>'));
+    assert.equal(snippet.language, 'handlebars');
+    assert.equal(snippet.extension, 'hbs');
+  });
 });
