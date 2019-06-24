@@ -1,3 +1,6 @@
+# 2.4.0
+ - ENHANCEMENT: allow configuring snippet file extensions, by @shimizust
+
 # 2.3.1
 
  - HOUSEKEEPING: bumping a deprecated glob dep. Thanks @AndreJoaquim.
