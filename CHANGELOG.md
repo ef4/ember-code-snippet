@@ -1,3 +1,6 @@
+# 2.4.1
+ - BUGFIX: path handling on windows by @LNieuwmegen.
+
 # 2.4.0
  - ENHANCEMENT: allow configuring snippet file extensions, by @shimizust
 
