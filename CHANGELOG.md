@@ -17,6 +17,8 @@
         {{/let}}
         ```
 
+# 2.4.0
+ - ENHANCEMENT: allow configuring snippet file extensions, by @shimizust
 
 # 2.3.1
 
