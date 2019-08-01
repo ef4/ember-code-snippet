@@ -33,12 +33,8 @@ both together.
 Create a new "snippets" directory at the top level of your ember-cli
 application or addon, and place the code snippets you'd like to render in their
 own files inside it. They will be identified by filename. So if you
-create the file `snippets/sample-template.hbs`, you can embed it in a
-template with:
-
-```hbs
-{{code-snippet name="sample-template.hbs"}}
-```
+create the file `snippets/sample-template.hbs`, you can refer to it when using
+the `get-code-snippet` helper as `sample-template.hbs`.
 
 You can choose to load snippet files from different paths by passing
 an option to `new EmberApp` in your `ember-cli-build.js`:
