@@ -29,7 +29,7 @@ module.exports = {
 
   snippetExtensions() {
     let app = findHost(this);
-    return app.options.snippetExtensions || ['js','ts','coffee','html','hbs','md','css','sass','scss','less','emblem','yaml'];
+    return app.options.snippetExtensions || ['js','ts','gjs','gts','coffee','html','hbs','md','css','sass','scss','less','emblem','yaml'];
   },
 
   includeExtensions() {
